@@ -4,7 +4,7 @@
     <dl>
       <dt>Title:
       <dd><input type="text" size="30" name="title">
-      <dt>Category:
+      <dt>Category: <!-- create category section for input -->
       <dd><input type="text" size="20" name="category">
       <dt>Text:
       <dd><textarea name="text" rows="5" cols="40"></textarea>
@@ -20,16 +20,15 @@
         <dd><input type="submit" value="Apply"></dd>
     </dl>
     </form>
+
   <ul class="entries">
   {% for entry in entries %}
-      <form>
-        <form action="{{  url_for('delete_entries') }}" method="get" class="delete-entry">
-            <d1>
-                <dd><input type="submit" value="X"></dd>
-                <dd><input type="hidden" id="id" name="delete" value="id>"</dd>
-            </d1>
-      </form>
+    <!-- display the table columns i want on the same row including category -->
     <li><h2>{{ entry.title }}</h2><h3>{{ entry.category }}</h3>{{ entry.text|safe }}</li>
+        <form action="{{  url_for('delete_entries') }}" method="post" class="delete-entry">
+        <!--create form for delete button -->
+                <button type="submit" name="deleteEntry" value={{ entry.id }}> Delete This Post </button>
+        </form>
   {% else %}
     <li><em>Unbelievable.  No entries here so far</em></li>
   {% endfor %}

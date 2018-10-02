@@ -68,39 +68,51 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('select title, category, text from entries order by id desc')
+    cur = db.execute('select * from entries order by id desc')
     entries = cur.fetchall()
     return render_template('show_entries.html', entries=entries)
 
 @app.route('/filter', methods=['GET'])  # Use get method to change what entries are being displayed
 def filter_entries():
     db = get_db()
+
+    # if filter filter the post
     if request.args.get("filter") != "":
-        cur = db.execute('select title, category, text from entries WHERE category = ?',
-                     (request.args.get("filter"),))  # ? to query and request filter form where clause lets me chose
-                                                     # what is shown
-        entries = cur.fetchall()
-        return render_template('show_entries.html', entries=entries)
-    else:
-        db = get_db()
-        cur = db.execute('select title, category, text from entries order by id desc')
+        cur = db.execute('select * from entries WHERE category = ?',
+                         (request.args.get("filter"),))
+        # ? to query and request filter form where clause lets me chose what is shown
         entries = cur.fetchall()
         return render_template('show_entries.html', entries=entries)
 
-@app.route('/delete', methods=['GET'])  # Use get method to change what entries are being displayed
+    # if no filter return show entries
+    else:
+        db = get_db()
+        cur = db.execute('select * from entries order by id desc')
+        entries = cur.fetchall()
+        return render_template('show_entries.html', entries=entries)
+
+@app.route('/delete', methods=['post', 'delete'])
+# Use delete method to get permission to delete from table and post to change entry
 def delete_entries():
     db = get_db()
-    cur = db.execute('DELETE from entries WHERE id = ?',
-                     (request.args.get("delete"),))  # ? to query and request filter form where clause lets me chose
-                                                     # what is shown
-    entries = cur.fetchall()
-    return render_template('show_entries.html', entries=entries)
+
+    # delete from table where id is equal to the value in delete entry
+    db.execute('delete from entries WHERE id = ?',
+               [request.form["deleteEntry"]])
+
+    db.commit()
+    flash('Entry was successfully deleted')
+
+    return show_entries()
 
 @app.route('/add', methods=['POST'])
 def add_entry():
     db = get_db()
+
+    # take category as an input as well when selecting values
     db.execute('insert into entries (title, category, text) values (?, ?, ?)',
                [request.form['title'], request.form['category'], request.form['text']])
+
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
