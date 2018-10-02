@@ -72,6 +72,15 @@ def show_entries():
     entries = cur.fetchall()
     return render_template('show_entries.html', entries=entries)
 
+@app.route('/filter', methods=['GET'])  # Use get method to change what entries are being displayed
+def filter_entries():
+    db = get_db()
+    cur = db.execute('select title, category, text from entries WHERE category = ?',
+                     (request.args.get("filter"),))  # ? to query and request filter form where clause lets me chose
+                                                     # what is shown
+    entries = cur.fetchall()
+    return render_template('show_entries.html', entries=entries)
+
 
 @app.route('/add', methods=['POST'])
 def add_entry():
