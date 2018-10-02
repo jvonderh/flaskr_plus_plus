@@ -75,12 +75,26 @@ def show_entries():
 @app.route('/filter', methods=['GET'])  # Use get method to change what entries are being displayed
 def filter_entries():
     db = get_db()
-    cur = db.execute('select title, category, text from entries WHERE category = ?',
+    if request.args.get("filter") != "":
+        cur = db.execute('select title, category, text from entries WHERE category = ?',
                      (request.args.get("filter"),))  # ? to query and request filter form where clause lets me chose
+                                                     # what is shown
+        entries = cur.fetchall()
+        return render_template('show_entries.html', entries=entries)
+    else:
+        db = get_db()
+        cur = db.execute('select title, category, text from entries order by id desc')
+        entries = cur.fetchall()
+        return render_template('show_entries.html', entries=entries)
+
+@app.route('/delete', methods=['GET'])  # Use get method to change what entries are being displayed
+def delete_entries():
+    db = get_db()
+    cur = db.execute('DELETE from entries WHERE id = ?',
+                     (request.args.get("delete"),))  # ? to query and request filter form where clause lets me chose
                                                      # what is shown
     entries = cur.fetchall()
     return render_template('show_entries.html', entries=entries)
-
 
 @app.route('/add', methods=['POST'])
 def add_entry():
