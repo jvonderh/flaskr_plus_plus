@@ -24,6 +24,7 @@
   <ul class="entries">
   {% for entry in entries %}
     <!-- display the table columns i want on the same row including category -->
+    <!-- Naing helped me with this section as I had an extra form tag and my button was not formatted correctly -->
     <li><h2>{{ entry.title }}</h2><h3>{{ entry.category }}</h3>{{ entry.text|safe }}</li>
         <form action="{{  url_for('delete_entries') }}" method="post" class="delete-entry">
         <!--create form for delete button -->
