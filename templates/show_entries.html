@@ -29,6 +29,10 @@
         <form action="{{  url_for('delete_entries') }}" method="post" class="delete-entry">
         <!--create form for delete button -->
                 <button type="submit" name="deleteEntry" value={{ entry.id }}> Delete This Post </button>
+
+        </form>
+        <form action="{{ url_for('edit_entry') }}" method="post" class="update_entry">
+            <button type="submit" name="updateEntry" value={{ entry.id }}> Edit This Post </button>
         </form>
   {% else %}
     <li><em>Unbelievable.  No entries here so far</em></li>

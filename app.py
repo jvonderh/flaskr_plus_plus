@@ -14,7 +14,6 @@ import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, g, redirect, url_for, render_template, flash
 
-
 # create our little application :)
 app = Flask(__name__)
 
@@ -72,6 +71,7 @@ def show_entries():
     entries = cur.fetchall()
     return render_template('show_entries.html', entries=entries)
 
+
 @app.route('/filter', methods=['GET'])  # Use get method to change what entries are being displayed
 def filter_entries():
     db = get_db()
@@ -91,6 +91,7 @@ def filter_entries():
         entries = cur.fetchall()
         return render_template('show_entries.html', entries=entries)
 
+
 @app.route('/delete', methods=['post', 'delete'])
 # Use delete method to get permission to delete from table and post to change entry
 def delete_entries():
@@ -104,6 +105,24 @@ def delete_entries():
     flash('Entry was successfully deleted')
 
     return show_entries()
+
+
+@app.route('/edit', methods=['POST'])
+def edit_entry():
+    db = get_db()
+
+    # take category as an input as well when selecting values
+    cur = db.execute('Select title, category, text from entries where id = ?',
+                     [request.form["updateEntry"]])
+    entries = cur.fetchone()
+
+    db.execute('Update entries Set title=?, category=?, text=? ',
+               request.form["title"], request.form['category'], request.form['text'])
+
+    db.commit()
+    flash('New entry was successfully posted')
+    return render_template('edit_entry.html', entries=entries)
+
 
 @app.route('/add', methods=['POST'])
 def add_entry():

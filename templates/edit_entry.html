@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<form action="{{ url_for('edit_entry') }}" method="post" class="edit-entry">
+    <dl>
+      <dt>Title:
+      <dd><input type="text" size="30" name="title" value=request.form['title']>
+      <dt>Category: <!-- create category section for input -->
+      <dd><input type="text" size="20" name="category" value=request.form['category']>
+      <dt>Text:
+      <dd><textarea name="text" rows="5" cols="40" value=request.form['text']></textarea>
+      <dd><input type="submit" value="Share">
+    </dl>
+  </form>
