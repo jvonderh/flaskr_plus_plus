@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c264e6bc-9e58-43e7-9c3c-4264fcc5a01a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/flaskr_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/edit_entry.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit_entry.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskr_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskr_tests.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +81,7 @@
         <counts>
           <entry key="HTML" value="1791" />
           <entry key="Markdown" value="261" />
-          <entry key="Python" value="3868" />
+          <entry key="Python" value="4045" />
           <entry key="SQL" value="162" />
           <entry key="YAML" value="18" />
         </counts>
@@ -103,7 +101,7 @@
         <counts>
           <entry key="html" value="1791" />
           <entry key="md" value="261" />
-          <entry key="py" value="3868" />
+          <entry key="py" value="4045" />
           <entry key="sql" value="162" />
           <entry key="yml" value="18" />
         </counts>
@@ -134,8 +132,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flaskr_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+            <state relative-caret-position="119">
+              <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -440,8 +438,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flaskr_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+        <state relative-caret-position="119">
+          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

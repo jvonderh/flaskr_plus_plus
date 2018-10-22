@@ -16,10 +16,12 @@ class FlaskrTestCase(unittest.TestCase):
         os.close(self.db_fd)
         os.unlink(flaskr.app.config['DATABASE'])
 
+    # go to default route and check to see if no entries right
     def test_empty_db(self):
         rv = self.app.get('/')
         assert b'Unbelieveable. No entries here so far' in rv.data
 
+    # go to add route and make sure that adding an entry works
     def test_messages(self):
         rv = self.app.post('/add', data=dict(
             title='<Hello>',
@@ -29,10 +31,12 @@ class FlaskrTestCase(unittest.TestCase):
         assert b'No entries here so far' not in rv.data
         assert b'&lt;Hello&gt;' in rv.data
         assert b'yeah' in rv.data
-        assert b'<strong>HTML</strong> allowed here' in rv.data
 
+    # add something to page then see if it gets deleted
     def test_delete(self):
-        rv = self.app.get('/delete')
+        rv = self.app.get('/delete', data=dict(
+            id=1
+        ))
         vr = self.app.get('/add', data=dict(
             title='<hello>',
             category='yeah',
@@ -43,6 +47,7 @@ class FlaskrTestCase(unittest.TestCase):
         assert b'yeah' not in rv.data
         assert b'<strong>HTML</strong> allowed here' not in rv.data
 
+    # add something and filter it. Check to see if the information that is added is still there
     def test_filter(self):
         rv = self.app.get('/add', data=dict(
             title='<hello>',

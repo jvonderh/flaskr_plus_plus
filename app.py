@@ -111,11 +111,12 @@ def delete_entries():
 def edit_entry():
     db = get_db()
 
-    # take category as an input as well when selecting values
+    # select information I want to populate new template with
     cur = db.execute('Select title, category, text from entries where id = ?',
                      [request.form["updateEntry"]])
     entries = cur.fetchone()
 
+    # execute to the new page, should only be the one that was selected to edit
     db.execute('Update entries Set title=?, category=?, text=? ',
                request.form["title"], request.form['category'], request.form['text'])
 
