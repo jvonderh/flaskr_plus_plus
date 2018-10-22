@@ -19,7 +19,7 @@ class FlaskrTestCase(unittest.TestCase):
     # go to default route and check to see if no entries right
     def test_empty_db(self):
         rv = self.app.get('/')
-        assert b'Unbelieveable. No entries here so far' in rv.data
+        assert b'No entries here so far' in rv.data
 
     # go to add route and make sure that adding an entry works
     def test_messages(self):
@@ -54,12 +54,11 @@ class FlaskrTestCase(unittest.TestCase):
             category='yeah',
             text='yeah'
         ))
-        vr = self.app.get('filter', data=dict(
-            filter='yeah'
-        ))
-        assert b'No entries here so far' not in vr.data
+        vr = self.app.get('/filter?filter=yeah')
+        assert b'No entries here so far' not in rv.data
         assert b'yeah' in rv.data
-
+        rv.data
+        assert b'yeah' in vr.data
 
 if __name__ == '__main__':
     unittest.main()
